@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="sa" default="all">
+  
+  
+  <property file="sa.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.maven:_antlr:antlr:2.7.7.classpath">
+    <pathelement location="${path.variable.maven_repository}/antlr/antlr/2.7.7/antlr-2.7.7.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-logging:commons-logging:1.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_dom4j:dom4j:1.6.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.servlet.jsp:jsp-api:2.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/servlet/jsp/jsp-api/2.1/jsp-api-2.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.servlet:servlet-api:2.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_jstl:jstl:1.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/jstl/jstl/1.2/jstl-1.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_junit:junit:4.8.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/junit/junit/4.8.2/junit-4.8.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_mysql:mysql-connector-java:5.1.28.classpath">
+    <pathelement location="${path.variable.maven_repository}/mysql/mysql-connector-java/5.1.28/mysql-connector-java-5.1.28.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.commons:commons-lang3:3.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.codehaus.jackson:jackson-core-lgpl:1.9.13.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/codehaus/jackson/jackson-core-lgpl/1.9.13/jackson-core-lgpl-1.9.13.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.codehaus.jackson:jackson-mapper-lgpl:1.9.13.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/codehaus/jackson/jackson-mapper-lgpl/1.9.13/jackson-mapper-lgpl-1.9.13.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hibernate.common:hibernate-commons-annotations:4.0.4.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hibernate/common/hibernate-commons-annotations/4.0.4.Final/hibernate-commons-annotations-4.0.4.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hibernate:hibernate-core:4.3.0.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hibernate/hibernate-core/4.3.0.Final/hibernate-core-4.3.0.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.javassist:javassist:3.18.1-ga.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.jboss.logging:jboss-logging-annotations:1.2.0.beta1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/jboss/logging/jboss-logging-annotations/1.2.0.Beta1/jboss-logging-annotations-1.2.0.Beta1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.jboss.logging:jboss-logging:3.1.3.ga.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/jboss/logging/jboss-logging/3.1.3.GA/jboss-logging-3.1.3.GA.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.0.0.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/jboss/spec/javax/transaction/jboss-transaction-api_1.2_spec/1.0.0.Final/jboss-transaction-api_1.2_spec-1.0.0.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.jboss:jandex:1.1.0.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/jboss/jandex/1.1.0.Final/jandex-1.1.0.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-aop:4.3.3.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-aop/4.3.3.RELEASE/spring-aop-4.3.3.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-beans:4.3.3.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-beans/4.3.3.RELEASE/spring-beans-4.3.3.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-context:4.3.3.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-context/4.3.3.RELEASE/spring-context-4.3.3.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-core:4.3.3.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-core/4.3.3.RELEASE/spring-core-4.3.3.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-expression:4.3.3.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-expression/4.3.3.RELEASE/spring-expression-4.3.3.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-jdbc:4.3.3.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-jdbc/4.3.3.RELEASE/spring-jdbc-4.3.3.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-orm:4.3.3.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-orm/4.3.3.RELEASE/spring-orm-4.3.3.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-tx:4.3.3.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-tx/4.3.3.RELEASE/spring-tx-4.3.3.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-web:4.3.3.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-web/4.3.3.RELEASE/spring-web-4.3.3.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-webmvc:4.3.3.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-webmvc/4.3.3.RELEASE/spring-webmvc-4.3.3.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_xml-apis:xml-apis:1.0.b2.classpath">
+    <pathelement location="${path.variable.maven_repository}/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar"/>
+  </path>
+  
+  
+  <!-- Global Libraries -->
+  
+  
+  <!-- Application Server Libraries -->
+  
+  <path id="library.tomcat_9.0.0.m10.classpath">
+    <pathelement location="D:/server/apache-tomcat-9.0.0.M10/lib/jsp-api.jar"/>
+    <pathelement location="D:/server/apache-tomcat-9.0.0.M10/lib/servlet-api.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module sa -->
+  
+  <dirname property="module.sa.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.sa" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.sa" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.sa" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.sa" value="-encoding UTF-8 -source 1.5 -target 1.5 ${compiler.args}"/>
+  
+  <property name="sa.output.dir" value="${module.sa.basedir}/target/classes"/>
+  <property name="sa.testoutput.dir" value="${module.sa.basedir}/target/test-classes"/>
+  
+  <path id="sa.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="sa.module.production.classpath">
+    <path refid="${module.jdk.classpath.sa}"/>
+    <path refid="library.tomcat_9.0.0.m10.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.3.3.release.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jdbc:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-tx:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-orm:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.1.classpath"/>
+    <path refid="library.maven:_javax.servlet:servlet-api:2.5.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:jsp-api:2.1.classpath"/>
+    <path refid="library.maven:_jstl:jstl:1.2.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-core:4.3.0.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.1.3.ga.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging-annotations:1.2.0.beta1.classpath"/>
+    <path refid="library.maven:_org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.0.0.final.classpath"/>
+    <path refid="library.maven:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.maven:_org.hibernate.common:hibernate-commons-annotations:4.0.4.final.classpath"/>
+    <path refid="library.maven:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.18.1-ga.classpath"/>
+    <path refid="library.maven:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.maven:_org.jboss:jandex:1.1.0.final.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-mapper-lgpl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-lgpl:1.9.13.classpath"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.28.classpath"/>
+  </path>
+  
+  <path id="sa.runtime.production.module.classpath">
+    <pathelement location="${sa.output.dir}"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.3.3.release.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jdbc:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-tx:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-orm:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.1.classpath"/>
+    <path refid="library.maven:_javax.servlet:servlet-api:2.5.classpath"/>
+    <path refid="library.maven:_jstl:jstl:1.2.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-core:4.3.0.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.1.3.ga.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging-annotations:1.2.0.beta1.classpath"/>
+    <path refid="library.maven:_org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.0.0.final.classpath"/>
+    <path refid="library.maven:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.maven:_org.hibernate.common:hibernate-commons-annotations:4.0.4.final.classpath"/>
+    <path refid="library.maven:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.18.1-ga.classpath"/>
+    <path refid="library.maven:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.maven:_org.jboss:jandex:1.1.0.final.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-mapper-lgpl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-lgpl:1.9.13.classpath"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.28.classpath"/>
+  </path>
+  
+  <path id="sa.module.classpath">
+    <path refid="${module.jdk.classpath.sa}"/>
+    <pathelement location="${sa.output.dir}"/>
+    <path refid="library.tomcat_9.0.0.m10.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.3.3.release.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jdbc:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-tx:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-orm:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.1.classpath"/>
+    <path refid="library.maven:_javax.servlet:servlet-api:2.5.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:jsp-api:2.1.classpath"/>
+    <path refid="library.maven:_junit:junit:4.8.2.classpath"/>
+    <path refid="library.maven:_jstl:jstl:1.2.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-core:4.3.0.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.1.3.ga.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging-annotations:1.2.0.beta1.classpath"/>
+    <path refid="library.maven:_org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.0.0.final.classpath"/>
+    <path refid="library.maven:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.maven:_org.hibernate.common:hibernate-commons-annotations:4.0.4.final.classpath"/>
+    <path refid="library.maven:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.18.1-ga.classpath"/>
+    <path refid="library.maven:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.maven:_org.jboss:jandex:1.1.0.final.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-mapper-lgpl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-lgpl:1.9.13.classpath"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.28.classpath"/>
+  </path>
+  
+  <path id="sa.runtime.module.classpath">
+    <pathelement location="${sa.testoutput.dir}"/>
+    <pathelement location="${sa.output.dir}"/>
+    <path refid="library.tomcat_9.0.0.m10.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.3.3.release.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jdbc:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-tx:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-orm:4.3.3.release.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.1.classpath"/>
+    <path refid="library.maven:_javax.servlet:servlet-api:2.5.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:jsp-api:2.1.classpath"/>
+    <path refid="library.maven:_junit:junit:4.8.2.classpath"/>
+    <path refid="library.maven:_jstl:jstl:1.2.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-core:4.3.0.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.1.3.ga.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging-annotations:1.2.0.beta1.classpath"/>
+    <path refid="library.maven:_org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.0.0.final.classpath"/>
+    <path refid="library.maven:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.maven:_org.hibernate.common:hibernate-commons-annotations:4.0.4.final.classpath"/>
+    <path refid="library.maven:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.18.1-ga.classpath"/>
+    <path refid="library.maven:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.maven:_org.jboss:jandex:1.1.0.final.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-mapper-lgpl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-lgpl:1.9.13.classpath"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.28.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.sa">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.sa">
+    <patternset refid="excluded.from.module.sa"/>
+  </patternset>
+  
+  <path id="sa.module.sourcepath">
+    <dirset dir="${module.sa.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="sa.module.test.sourcepath">
+    <dirset dir="${module.sa.basedir}">
+      <include name="src/main/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.sa" depends="compile.module.sa.production,compile.module.sa.tests" description="Compile module sa"/>
+  
+  <target name="compile.module.sa.production" depends="register.custom.compilers" description="Compile module sa; production classes">
+    <mkdir dir="${sa.output.dir}"/>
+    <javac2 destdir="${sa.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.sa}/javac">
+      <compilerarg line="${compiler.args.sa}"/>
+      <bootclasspath refid="sa.module.bootclasspath"/>
+      <classpath refid="sa.module.production.classpath"/>
+      <src refid="sa.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.sa"/>
+    </javac2>
+    
+    <copy todir="${sa.output.dir}">
+      <fileset dir="${module.sa.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.sa.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.sa.tests" depends="register.custom.compilers,compile.module.sa.production" description="compile module sa; test classes" unless="skip.tests">
+    <mkdir dir="${sa.testoutput.dir}"/>
+    <javac2 destdir="${sa.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.sa}/javac">
+      <compilerarg line="${compiler.args.sa}"/>
+      <bootclasspath refid="sa.module.bootclasspath"/>
+      <classpath refid="sa.module.classpath"/>
+      <src refid="sa.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.sa"/>
+    </javac2>
+    
+    <copy todir="${sa.testoutput.dir}">
+      <fileset dir="${module.sa.basedir}/src/main/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.sa" description="cleanup module">
+    <delete dir="${sa.output.dir}"/>
+    <delete dir="${sa.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.sa, clean.artifact.sa:war_exploded, clean.artifact.sa:web_exploded" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.sa" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.sa:war" value="${basedir}/target"/>
+    <property name="artifact.output.sa:war_exploded" value="${basedir}/target/sa-1.0-sa"/>
+    <property name="artifact.output.sa:web_exploded" value="${basedir}/out/artifacts/sa_Web_exploded"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.sa-1.0-sa.war" value="${artifacts.temp.dir}/sa-1.0-sa.war"/>
+  </target>
+  
+  <target name="clean.artifact.sa:war_exploded" description="clean sa:war exploded artifact output">
+    <delete dir="${artifact.output.sa:war_exploded}"/>
+  </target>
+  
+  <target name="clean.artifact.sa:web_exploded" description="clean sa:Web exploded artifact output">
+    <delete dir="${artifact.output.sa:web_exploded}"/>
+  </target>
+  
+  <target name="artifact.sa:war" depends="init.artifacts, artifact.sa:war_exploded" description="Build &#39;sa:war&#39; artifact">
+    <property name="artifact.temp.output.sa:war" value="${artifacts.temp.dir}/sa_war"/>
+    <mkdir dir="${artifact.temp.output.sa:war}"/>
+    <zip destfile="${temp.jar.path.sa-1.0-sa.war}">
+      <zipfileset dir="${artifact.temp.output.sa:war_exploded}"/>
+    </zip>
+    <copy file="${temp.jar.path.sa-1.0-sa.war}" tofile="${artifact.temp.output.sa:war}/sa-1.0-sa.war"/>
+  </target>
+  
+  <target name="artifact.sa:war_exploded" depends="init.artifacts, compile.module.sa" description="Build &#39;sa:war exploded&#39; artifact">
+    <mkdir dir="${artifact.output.sa:war_exploded}"/>
+    <mkdir dir="${artifact.output.sa:war_exploded}/WEB-INF"/>
+    <mkdir dir="${artifact.output.sa:war_exploded}/WEB-INF/classes"/>
+    <copy todir="${artifact.output.sa:war_exploded}/WEB-INF/classes">
+      <fileset dir="${sa.output.dir}"/>
+    </copy>
+    <mkdir dir="${artifact.output.sa:war_exploded}/WEB-INF/lib"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-core/4.3.3.RELEASE/spring-core-4.3.3.RELEASE.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/spring-core-4.3.3.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/commons-logging/commons-logging/1.2/commons-logging-1.2.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/commons-logging-1.2.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-web/4.3.3.RELEASE/spring-web-4.3.3.RELEASE.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/spring-web-4.3.3.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-aop/4.3.3.RELEASE/spring-aop-4.3.3.RELEASE.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/spring-aop-4.3.3.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-beans/4.3.3.RELEASE/spring-beans-4.3.3.RELEASE.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/spring-beans-4.3.3.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-context/4.3.3.RELEASE/spring-context-4.3.3.RELEASE.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/spring-context-4.3.3.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-webmvc/4.3.3.RELEASE/spring-webmvc-4.3.3.RELEASE.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/spring-webmvc-4.3.3.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-expression/4.3.3.RELEASE/spring-expression-4.3.3.RELEASE.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/spring-expression-4.3.3.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-jdbc/4.3.3.RELEASE/spring-jdbc-4.3.3.RELEASE.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/spring-jdbc-4.3.3.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-tx/4.3.3.RELEASE/spring-tx-4.3.3.RELEASE.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/spring-tx-4.3.3.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/springframework/spring-orm/4.3.3.RELEASE/spring-orm-4.3.3.RELEASE.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/spring-orm-4.3.3.RELEASE.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/commons-lang3-3.1.jar"/>
+    <copy file="${path.variable.maven_repository}/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/servlet-api-2.5.jar"/>
+    <copy file="${path.variable.maven_repository}/jstl/jstl/1.2/jstl-1.2.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/jstl-1.2.jar"/>
+    <copy file="${path.variable.maven_repository}/org/hibernate/hibernate-core/4.3.0.Final/hibernate-core-4.3.0.Final.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/hibernate-core-4.3.0.Final.jar"/>
+    <copy file="${path.variable.maven_repository}/org/jboss/logging/jboss-logging/3.1.3.GA/jboss-logging-3.1.3.GA.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/jboss-logging-3.1.3.GA.jar"/>
+    <copy file="${path.variable.maven_repository}/org/jboss/logging/jboss-logging-annotations/1.2.0.Beta1/jboss-logging-annotations-1.2.0.Beta1.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/jboss-logging-annotations-1.2.0.Beta1.jar"/>
+    <copy file="${path.variable.maven_repository}/org/jboss/spec/javax/transaction/jboss-transaction-api_1.2_spec/1.0.0.Final/jboss-transaction-api_1.2_spec-1.0.0.Final.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/jboss-transaction-api_1.2_spec-1.0.0.Final.jar"/>
+    <copy file="${path.variable.maven_repository}/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/dom4j-1.6.1.jar"/>
+    <copy file="${path.variable.maven_repository}/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/xml-apis-1.0.b2.jar"/>
+    <copy file="${path.variable.maven_repository}/org/hibernate/common/hibernate-commons-annotations/4.0.4.Final/hibernate-commons-annotations-4.0.4.Final.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/hibernate-commons-annotations-4.0.4.Final.jar"/>
+    <copy file="${path.variable.maven_repository}/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+    <copy file="${path.variable.maven_repository}/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/javassist-3.18.1-GA.jar"/>
+    <copy file="${path.variable.maven_repository}/antlr/antlr/2.7.7/antlr-2.7.7.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/antlr-2.7.7.jar"/>
+    <copy file="${path.variable.maven_repository}/org/jboss/jandex/1.1.0.Final/jandex-1.1.0.Final.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/jandex-1.1.0.Final.jar"/>
+    <copy file="${path.variable.maven_repository}/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/jackson-core-asl-1.9.13.jar"/>
+    <copy file="${path.variable.maven_repository}/org/codehaus/jackson/jackson-mapper-lgpl/1.9.13/jackson-mapper-lgpl-1.9.13.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/jackson-mapper-lgpl-1.9.13.jar"/>
+    <copy file="${path.variable.maven_repository}/org/codehaus/jackson/jackson-core-lgpl/1.9.13/jackson-core-lgpl-1.9.13.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/jackson-core-lgpl-1.9.13.jar"/>
+    <copy file="${path.variable.maven_repository}/mysql/mysql-connector-java/5.1.28/mysql-connector-java-5.1.28.jar" tofile="${artifact.output.sa:war_exploded}/WEB-INF/lib/mysql-connector-java-5.1.28.jar"/>
+    <mkdir dir="${artifact.output.sa:war_exploded}/META-INF"/>
+    <copy file="${basedir}/target/sa-1.0-sa/META-INF/MANIFEST.MF" tofile="${artifact.output.sa:war_exploded}/META-INF/MANIFEST.MF"/>
+    <copy todir="${artifact.output.sa:war_exploded}">
+      <fileset dir="${basedir}/src/main/webapp"/>
+    </copy>
+    <mkdir dir="${artifact.output.sa:war_exploded}/WEB-INF"/>
+    <copy file="${basedir}/src/main/webapp/WEB-INF/web.xml" tofile="${artifact.output.sa:war_exploded}/WEB-INF/web.xml"/>
+  </target>
+  
+  <target name="artifact.sa:web_exploded" depends="init.artifacts, compile.module.sa" description="Build &#39;sa:Web exploded&#39; artifact">
+    <mkdir dir="${artifact.output.sa:web_exploded}"/>
+    <copy todir="${artifact.output.sa:web_exploded}">
+      <fileset dir="${basedir}/src/main/webapp"/>
+    </copy>
+    <mkdir dir="${artifact.output.sa:web_exploded}/WEB-INF"/>
+    <copy file="${basedir}/src/main/webapp/WEB-INF/web.xml" tofile="${artifact.output.sa:web_exploded}/WEB-INF/web.xml"/>
+    <mkdir dir="${artifact.output.sa:web_exploded}/WEB-INF"/>
+    <mkdir dir="${artifact.output.sa:web_exploded}/WEB-INF/classes"/>
+    <copy todir="${artifact.output.sa:web_exploded}/WEB-INF/classes">
+      <fileset dir="${sa.output.dir}"/>
+    </copy>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.sa:war, artifact.sa:war_exploded, artifact.sa:web_exploded" description="Build all artifacts">
+    <mkdir dir="${artifact.output.sa:war}"/>
+    <copy todir="${artifact.output.sa:war}">
+      <fileset dir="${artifact.temp.output.sa:war}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
