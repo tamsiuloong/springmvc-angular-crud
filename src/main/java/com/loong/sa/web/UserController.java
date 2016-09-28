@@ -3,7 +3,6 @@ package com.loong.sa.web;
 import com.loong.sa.entity.User;
 import com.loong.sa.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +13,6 @@ import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -147,29 +145,29 @@ public class UserController {
     private IUserService userService;
 
 
-    @Bean
-    IUserService userService(){
-
-        return new IUserService() {
-             List<User> result = new ArrayList<User>();
-            {
-                result.add(new User("1","jay"));
-                result.add(new User("2","andy"));
-            }
-            public void deleteUser(User user) {
-                System.out.println("deleteUser");
-                result.remove(user);
-            }
-
-            public List<User> getUserList(int page, int pageSize) {
-
-                return result;
-            }
-
-            public void saveOrUpdateUser(User user) {
-                System.out.println("saveOrUpdateUser");
-                result.add(user);
-            }
-        };
-    }
+//    @Bean
+//    IUserService userService(){
+//
+//        return new IUserService() {
+//             List<User> result = new ArrayList<User>();
+//            {
+//                result.add(new User("1","jay"));
+//                result.add(new User("2","andy"));
+//            }
+//            public void deleteUser(User user) {
+//                System.out.println("deleteUser");
+//                result.remove(user);
+//            }
+//
+//            public List<User> getUserList(int page, int pageSize) {
+//
+//                return result;
+//            }
+//
+//            public void saveOrUpdateUser(User user) {
+//                System.out.println("saveOrUpdateUser");
+//                result.add(user);
+//            }
+//        };
+//    }
 }
